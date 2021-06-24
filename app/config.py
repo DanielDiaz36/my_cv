@@ -9,9 +9,9 @@ environ = dotenv_values()
     
 """
 
-PRODUCTION = int(environ.get('PRODUCTION', os.environ.get('PRODUCTION')))
+PRODUCTION = bool(int(environ.get('PRODUCTION', os.environ.get('PRODUCTION'))))
 
-if bool(PRODUCTION):
+if PRODUCTION:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     DEBUG = int(os.environ.get('DEBUG'))
     ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',')
@@ -28,7 +28,7 @@ if bool(PRODUCTION):
 
 else:
     SECRET_KEY = environ.get('SECRET_KEY')
-    DEBUG = not bool(PRODUCTION)
+    DEBUG = not PRODUCTION
     ALLOWED_HOSTS = environ.get('ALLOWED_HOSTS').split(',')
     DATABASES = {
         'default': {

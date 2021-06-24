@@ -1,2 +1,4 @@
+*.cpython-39.pyc
 .env
 .idea/
+staticfiles/
