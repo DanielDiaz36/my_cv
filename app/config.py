@@ -13,7 +13,7 @@ PRODUCTION = int(environ.get('PRODUCTION', os.environ.get('PRODUCTION')))
 
 if bool(PRODUCTION):
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    DEBUG = not bool(PRODUCTION)
+    DEBUG = int(os.environ.get('DEBUG'))
     ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',')
     DATABASES = {
         'default': {
