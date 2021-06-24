@@ -1,29 +1,15 @@
 import os
-from dotenv import load_dotenv
+from app import config
 from pathlib import Path
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Reading .env file
-load_dotenv(dotenv_path=str(os.path.join(str(BASE_DIR), '.env')))
+SECRET_KEY = config.SECRET_KEY
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
+DEBUG = config.DEBUG
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
-
-PRODUCTION = int(os.getenv('PRODUCTION'))
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = not bool(PRODUCTION)
-
-if os.getenv('ALLOWED_HOSTS'):
-    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
-else:
-    ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',')
+ALLOWED_HOSTS = config.ALLOWED_HOSTS
 
 
 # Application definition
@@ -67,20 +53,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'app.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': os.getenv('DB_ENGINE', os.environ.get('DB_ENGINE')),
-        'NAME': os.getenv('DB_NAME', os.environ.get('DB_NAME')),
-        'USER': os.getenv('DB_USER', os.environ.get('DB_USER')),
-        'PASSWORD': os.getenv('DB_PASSWORD', os.environ.get('DB_PASSWORD')),
-        'HOST': os.getenv('DB_HOST', os.environ.get('DB_HOST')),
-        'PORT': os.getenv('DB_PORT', os.environ.get('DB_PORT')),
-    }
-}
-
+DATABASES = config.DATABASES
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
